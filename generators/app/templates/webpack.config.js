@@ -11,7 +11,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
-    port: 7102,
+    port: 3000,
     publicPath: 'http://localhost:3000/dist/',
     hotOnly: true,
     overlay: {
@@ -19,7 +19,7 @@ module.exports = {
       errors: true
     },
     // host: '0.0.0.0',
-    allowedHosts: ['locala.com', 'localb.com'],
+    allowedHosts: ['localhost', 'locala.com', 'localb.com'],
     // 跨域
     headers: {
       'Access-Control-Allow-Origin': '*'
