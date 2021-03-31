@@ -6,7 +6,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const packageName = require('./package.json').name
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
@@ -28,15 +28,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: [
           'thread-loader',
           {
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true,
-              presets: ['@babel/env']
+              cacheDirectory: true
             }
           }
         ]
@@ -69,7 +68,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx']
   },
   output: {
     path: path.resolve(__dirname, 'dist/'),
