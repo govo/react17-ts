@@ -9,6 +9,7 @@ module.exports = {
     node: true
   },
   extends: [
+    'prettier',
     'standard',
     'plugin:react/recommended',
     'plugin:promise/recommended',
@@ -54,8 +55,22 @@ module.exports = {
     'comma-dangle': [ERROR, 'never'],
     '@typescript-eslint/ban-ts-ignore': OFF,
     '@typescript-eslint/no-explicit-any': ERROR,
-    'no-use-before-define': OFF
+    'no-use-before-define': OFF,
+    '@typescript-eslint/explicit-function-return-type': OFF,
+    '@typescript-eslint/explicit-module-boundary-types': OFF,
+    'react/react-in-jsx-scope': OFF // for tsconfig.json jsx=react-jsx
   },
+  overrides: [
+    {
+      // enable the rule specifically for TypeScript files
+      files: ['*.ts'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': [WARN, {
+          allowTypedFunctionExpressions: true
+        }]
+      }
+    }
+  ],
   settings: {
     'import/resolver': {
       node: {
@@ -67,5 +82,4 @@ module.exports = {
       version: 'detect'
     }
   }
-
 }
