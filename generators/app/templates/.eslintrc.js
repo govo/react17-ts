@@ -58,7 +58,8 @@ module.exports = {
     'no-use-before-define': OFF,
     '@typescript-eslint/explicit-function-return-type': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
-    'react/react-in-jsx-scope': OFF // for tsconfig.json jsx=react-jsx
+    'react/react-in-jsx-scope': OFF, // for tsconfig.json jsx=react-jsx
+    'react/jsx-uses-react': OFF
   },
   overrides: [
     {
