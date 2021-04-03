@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -12,8 +13,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public/'),
     port: 3000,
-    publicPath: 'http://localhost:3000/dist/',
+    publicPath: 'http://localhost:3000/',
     hotOnly: true,
+    historyApiFallback: true,
     overlay: {
       warnings: false,
       errors: true
@@ -23,6 +25,9 @@ module.exports = {
     // 跨域
     headers: {
       'Access-Control-Allow-Origin': '*'
+    },
+    proxy: {
+      '/json': 'http://localhost:3000'
     }
   },
   module: {
@@ -41,9 +46,30 @@ module.exports = {
         ]
 
       },
+      // {
+      //   test: /\.css$/,
+      //   use: ['thread-loader', 'style-loader', 'css-loader',
+      //     {
+      //       loader: 'less-loader', // compiles Less to CSS
+      //       options: {
+      //         javascriptEnabled: true
+      //       }
+      //     }]
+      // },
       {
-        test: /\.css$/,
-        use: ['thread-loader', 'style-loader', 'css-loader']
+        test: /\.(css|less)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          { loader: 'css-loader' },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -60,7 +86,7 @@ module.exports = {
                 return '[hash].[ext]'
               },
               outputPath: 'img'
-              // publicPath:'https://abc.com/hehe/'
+              // publicPath: '../assets/'
             }
           }
         ]
@@ -68,7 +94,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*', '.ts', '.tsx', '.js', '.jsx']
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@assets': path.resolve(__dirname, './public/assets/')
+    }
   },
   output: {
     path: path.resolve(__dirname, 'dist/'),

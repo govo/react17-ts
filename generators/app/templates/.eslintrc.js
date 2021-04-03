@@ -23,7 +23,9 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module'
   },
-  plugins: ['react', 'react-hooks', 'unicorn', 'promise', '@typescript-eslint'],
+  plugins: [
+    'react', 'react-hooks', 'unicorn', 'promise', '@typescript-eslint'
+  ],
   rules: {
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/extensions': [
