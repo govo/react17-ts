@@ -26,19 +26,19 @@ module.exports = class extends Generator {
         name: "name",
         message: "项目名字?",
         default: this.appname
-      },
-      {
-        type: "confirm",
-        name: "useRouter",
-        message: "是否使用路由?",
-        default: true
-      },
-      {
-        type: "confirm",
-        name: "useYarn",
-        message: "是否使用yarn?",
-        default: true
       }
+      // {
+      //   type: "confirm",
+      //   name: "useRouter",
+      //   message: "是否使用路由?",
+      //   default: true
+      // },
+      // {
+      //   type: "confirm",
+      //   name: "useYarn",
+      //   message: "是否使用yarn?",
+      //   default: true
+      // }
     ];
 
     return this.prompt(prompts).then(props => {
