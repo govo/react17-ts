@@ -11,6 +11,7 @@ module.exports = {
   extends: [
     'prettier',
     'standard',
+    'plugin:react-hooks/recommended',
     'plugin:react/recommended',
     'plugin:promise/recommended',
     'plugin:@typescript-eslint/recommended'
@@ -24,10 +25,11 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'react', 'react-hooks', 'unicorn', 'promise', '@typescript-eslint'
+    'react',
+    'react-hooks', 'unicorn', 'promise', '@typescript-eslint'
   ],
   rules: {
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/jsx-filename-extension': [ERROR, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/extensions': [
       ERROR,
       'ignorePackages',
@@ -61,7 +63,11 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': OFF,
     '@typescript-eslint/explicit-module-boundary-types': OFF,
     'react/react-in-jsx-scope': OFF, // for tsconfig.json jsx=react-jsx
-    'react/jsx-uses-react': OFF
+    'react/jsx-uses-react': OFF,
+    'react-hooks/rules-of-hooks': ERROR,
+    'react-hooks/exhaustive-deps': WARN,
+    indent: OFF,
+    '@typescript-eslint/indent': [ERROR, 2]
   },
   overrides: [
     {

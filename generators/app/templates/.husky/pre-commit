@@ -3,4 +3,4 @@
 # sourceTree中使用终端打开，即可正常跑脚本
 # alias openst="open -a /Applications/Sourcetree.app/Contents/MacOS/Sourcetree"
 
-yarn run eslint ./src
+yarn lint
