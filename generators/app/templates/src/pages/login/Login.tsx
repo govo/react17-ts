@@ -4,7 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 // import { history } from '@/utils/history'
 import './Login.less'
 import logo from '@/assets/img/logo.png'
-import { userService, LoginProps } from '@/user/user.service'
+import { userService, LoginProps } from '@/pages/user/user.service'
 import { PrivateHistoryState } from '@/components/common/PrivateRoute'
 
 const area = '地区'

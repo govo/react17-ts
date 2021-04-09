@@ -9,7 +9,7 @@ import './App.css'
 function App () {
   return (
     <div className="App">
-      <Router>
+      <Router basename={process.env.PUBLIC_PATH}>
         <>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}

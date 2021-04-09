@@ -10,6 +10,7 @@
       {
         "runtime": "automatic"
       }
-    ]
+    ],
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }

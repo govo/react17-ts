@@ -1,112 +1,98 @@
-import { Layout, Menu, Breadcrumb } from 'antd'
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined
-} from '@ant-design/icons'
-import '@/pages/admin/Admin.less'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { Button, Descriptions, Result, Avatar, Space, Statistic } from 'antd'
+import { LikeOutlined, UserOutlined } from '@ant-design/icons'
 
-const { Header, Content, Footer, Sider } = Layout
-const { SubMenu } = Menu
+import type { ProSettings } from '@ant-design/pro-layout'
+import ProLayout, { PageContainer, SettingDrawer } from '@ant-design/pro-layout'
+import defaultProps from './_defaultProps'
+import proSettings from './_proSettings'
+import UserAtPageHeader from '@/components/user/UserAtPageHeader'
 
-const COL_SIDE = '80px'
-const UNCOL_SIDE = '200px'
+import './Admin.less'
 
-function Admin () {
-  let [collapsed, setCollapsed] = useState(false)
-  const [marginLeft, setMarginLeft] = useState(UNCOL_SIDE)
-  const onCollapse = (val: boolean) => {
-    collapsed = val
-    setMarginLeft(collapsed ? COL_SIDE : UNCOL_SIDE)
-    setCollapsed(collapsed)
-  }
-
+function Admin (props: { collapsed: boolean }) {
+  const [settings, setSetting] = useState<Partial<ProSettings> | undefined>(proSettings)
+  const [pathname, setPathname] = useState('/welcome')
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0
+    <div
+      id="test-pro-layout"
+      style={{
+        height: '100vh'
+      }}
+    >
+      <ProLayout
+        {...defaultProps}
+        location={{
+          pathname
         }}
-        className="components-layout-side"
-        collapsible collapsed={collapsed}
-        onCollapse={onCollapse}>
-        <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Option 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-          </Menu.Item>
-          <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-            <Menu.Item key="3">Tom</Menu.Item>
-            <Menu.Item key="4">Bill</Menu.Item>
-            <Menu.Item key="5">Alex</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-            <Menu.Item key="6">Team 1</Menu.Item>
-            <Menu.Item key="8">Team 2</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="9" icon={<FileOutlined />}>
-            Files
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout className="site-layout" style={{ marginLeft }}>
-        <Header className="site-layout-background" style={{ padding: 0 }} />
-        <Content style={{ margin: '0 16px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
-            Bill is a cat.<br />
+        waterMarkProps={{
+          content: '用户名'
+        }}
+
+        onMenuHeaderClick={(e) => console.log(e)}
+        menuItemRender={(item, dom) => (
+          <a
+            onClick={() => {
+              setPathname(item.path || '/welcome')
+            }}
+          >
+            {dom}
+          </a>
+        )}
+        rightContentRender={() => (
+          <div>
+            <UserAtPageHeader />
           </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-      </Layout>
-    </Layout>
+        )}
+        {...settings}
+      >
+        <PageContainer
+        // extraContent={
+        //   <Space size={24}>
+        //     <Statistic title="Feedback" value={1128} prefix={<LikeOutlined />} />
+        //     <Statistic title="Unmerged" value={93} suffix="/ 100" />
+        //   </Space>
+        // }
+        // extra={[
+        //   <Button key="3">操作</Button>,
+        //   <Button key="2">操作</Button>,
+        //   <Button key="1" type="primary">
+        //     主操作
+        //   </Button>
+        // ]}
+        // footer={[
+        //   <Button key="3">重置</Button>,
+        //   <Button key="2" type="primary">
+        //     提交
+        //   </Button>
+        // ]}
+        >
+          <div
+            style={{
+              height: '120vh'
+            }}
+          >
+            <Result
+              status="404"
+              style={{
+                height: '100%',
+                background: '#fff'
+              }}
+              title="Hello World"
+              subTitle="Sorry, you are not authorized to access this page."
+              extra={<Button type="primary">Back Home</Button>}
+            />
+          </div>
+        </PageContainer>
+      </ProLayout>
+      {/* <SettingDrawer
+        pathname={pathname}
+        getContainer={() => document.getElementById('test-pro-layout')}
+        settings={settings}
+        onSettingChange={(changeSetting) => setSetting(changeSetting)}
+        disableUrlParams
+      /> */}
+    </div>
   )
 }
 
